@@ -22,5 +22,6 @@ Make sure you have python (version 3.11.7 was used for this project) and pip ins
 If you want to create outfits with pictures of your own clothes, upload png or jpg files to "static/my_closet".<br>
 Take into account that the app is prepared to give you an outfit composed by 4 items (shirt, Tshirt, trousers and shoes).<br>
 Also, you can change the "static/imagen1.jpg" file to the clothing item you would like to buy.
-
-You can contact me on my [Linkedin](https://www.linkedin.com/in/javier-de-juan-portela/?locale=en_US)
+<br><br><br>
+You can contact me on my [Linkedin](https://www.linkedin.com/in/javier-de-juan-portela/?locale=en_US)<br>
+Check the demo video [YouTube](https://www.youtube.com/watch?v=4fN7KtNrWFw)
