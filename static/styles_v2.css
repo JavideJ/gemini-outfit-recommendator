@@ -1,0 +1,146 @@
+/* ############################################################################ Estilos generales ############################################################################ */
+body {
+    font-family: 'ITCAvantGardeStd-Bk', sans-serif; /* Fuente similar a la de Zara */
+    line-height: 1.6;
+    color: #333;
+}
+
+/* ############################################################################ Encabezado ############################################################################ */
+header {
+    background-color: #222; /* Color de fondo oscuro */
+    color: white;
+}
+
+.logo img {
+    max-width: 160px; /* Ajusta el tamaño del logo */
+}
+
+header .logo {
+    text-align: center;
+    margin: 0; /* Elimina cualquier margen predeterminado */
+    padding: 0; /* Elimina cualquier padding predeterminado */
+}
+
+.index {
+    margin-left: 20px;
+    /* padding: 20px;   /* Añade un padding interno */
+}
+
+header .navbar {
+    padding: 0; 
+}
+
+.welcome-text {
+    margin-right: 15px; /* Espacio entre el texto y el icono de búsqueda */
+}
+
+/* ############################################################################ Cuerpo de la página ############################################################################ */
+.container {
+    max-width: 1800px; /* Ancho máximo del contenedor */
+}
+ 
+main img {
+    max-height: 700px;
+    /* width: 100%; /* Altura máxima de las imágenes del carrusel */ 
+    object-fit: contain; /* Para que las imágenes se ajusten al contenedor */
+}
+
+.outfit-image {
+    max-width: 100%;
+    max-height: 300px; /* O cualquier altura que se adapte a tu diseño */
+    object-fit: cover; 
+}
+
+.images-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual ancho */
+    gap: 10px; 
+    max-width: 800px;
+    justify-content: start;
+    border: 1px solid black;
+    padding: 20px; /* Añade 20px de padding interno a la sección */
+}
+
+.outfit {
+    margin: 0;  
+    padding: 0; 
+}
+
+.precio {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+.precio span {
+    color: #000000; 
+}
+
+.input-group .btn {
+    /* Estilos para el botón */
+}
+
+.tallas {
+    margin-bottom: 10px; /* Ajusta el valor según el espacio que desees */
+}
+
+/* Estilos para las estrellas de puntuación */
+.rating .checked {
+    color: orange; /* Color de las estrellas llenas */
+}
+
+.rating .fa-star {
+    margin-right: 5px; /* Espacio entre las estrellas */
+}
+
+.rating .reviews-count {
+    margin-left: 10px; /* Espacio entre las estrellas y el texto de reseñas */
+    font-size: 0.9em;  /* Tamaño de fuente ligeramente más pequeño para el texto de reseñas */
+    color: #666;       /* Color gris claro para el texto de reseñas */
+}
+
+.product-details .btn-group-toggle .btn-outline-secondary.active { /* Selector más específico */
+    background-color: black; 
+    color: white;            
+    border-color: black;     
+}
+
+
+
+/* ############################################################################ Logo de Gemini ############################################################################ */
+.gemini-recommendator {
+    background-color: white;
+    color: #9068c1;
+    margin-top: 15px;
+}
+
+.gemini-recommendator img {
+    width: 20px; /* Ajusta el tamaño del icono */
+    margin-right: 5px; /* Añade un margen a la derecha del icono */
+    margin-left: 0px;
+}
+
+.gemini-recommendator:hover {
+    background-color: #9068c1; /* Cambia el color de fondo a rojo cuando esté activo */
+}
+
+
+/* ############################################################################ Estilos para los iconos ############################################################################ */
+.icons-container a {
+    margin-left: 5px;
+    margin-right: 10px;  /* Añade un margen a la derecha */
+}
+
+.icons-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; /* Para centrar verticalmente los iconos */
+}
+
+/* ############################################################################ Pie de pagina ############################################################################ */
+footer ul li {
+    font-size: 0.9em; /* Ajusta el valor según el tamaño deseado */
+}
+main.container {
+  padding-bottom: 70px;
+}

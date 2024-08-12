@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ producto.nombre }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_v2.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    {% include 'header.html' %}
+    
+    <main class="container mt-5">
+        <div class="message-section">
+            <h2>What do you think about this outfit?</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6 images-section">
+            {% for image_path in result_image_paths %}
+                <div class="outfit">
+                    <img src="{{ url_for('static', filename=image_path) }}" alt="Outfit Image" class="outfit-image">
+                </div>
+            {% endfor %}
+            </div>            
+            <div class="col-md-6">
+                <section class="product-details">
+                    <h2>{{ producto.nombre }}</h2>
+                    <div class="rating">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="reviews-count">71 reviews</span>
+                    </div>
+                    <p class="precio"><span>{{ producto.precio }}</span></p>
+                    <p class="descripcion"><span>{{ producto.descripcion }}</span></p>
+                    <ul>
+                        <li>{{ producto.composicion }}</li>
+                        <li>{{ producto.cuidado }}</li>
+                        <li>Slim fit</li>
+                    </ul>
+                    <div class="tallas mt-3">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            {% for talla in producto.tallas %}
+                                <label class="btn btn-outline-secondary">
+                                    <input type="radio" name="size" id="talla-{{ talla }}" value="{{ talla }}" autocomplete="off"> {{ talla }}
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+                <section class="product-actions">
+                    <button class="btn btn-primary">Add to cart</button>
+                    <br>
+                    <button class="btn btn-primary gemini-recommendator">
+                        <img src="{{ url_for('static', filename='gemini.png') }}" alt="Gemini logo">
+                        <strong>G</strong>emini <strong>O</strong>utfit <strong>R</strong>ecommendator
+                    </button>
+                </section>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-5">
+                <div class="input-group mb-3"> 
+                    <input type="text" class="form-control" placeholder="Do you want to make any changes? Ask me! (Feature not available)" aria-label="Do you want to make any change? Ask me!" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" id="button-addon2">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </main>
+    
+    {% include 'footer.html' %}
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>   
+
+    const geminiButton = document.querySelector('.gemini-recommendator');
+
+    geminiButton.addEventListener('click', () => {
+        // Obtener la URL de la imagen
+        const imageUrl = document.getElementById('product-image').src;
+    
+        // Enviar la URL al servidor usando AJAX (necesitarás una ruta en Flask para manejar esto)
+        fetch('/result_v2', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ imageUrl: imageUrl })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);   
+     // Manejar la respuesta del servidor si es necesario
+        })
+        .catch(error => {
+            console.error('Error al enviar la URL de la imagen:', error);
+        });
+        
+        geminiButton.style.backgroundColor = 
+                    "#9068c1";
+        geminiButton.style.color = "white";
+    });
+    </script>
+</body>
+</html>

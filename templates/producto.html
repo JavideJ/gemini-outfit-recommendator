@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ producto.nombre }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_v2.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <main class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img id="product-image" src="{{ url_for('static', filename=producto.imagen) }}" class="img-fluid" alt="{{ producto.nombre }}">
+                <div id="recommended-images" style="display: none;"> </div>
+            </div>
+            <div class="col-md-6">
+                <section class="product-details">
+                    <h2>{{ producto.nombre }}</h2>
+                    <div class="rating">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="reviews-count">71 reviews</span>
+                    </div>
+                    <p class="precio"><span>{{ producto.precio }}</span></p>
+                    <p class="descripcion"><span>{{ producto.descripcion }}</span></p>
+                    <ul>
+                        <li>{{ producto.composicion }}</li>
+                        <li>{{ producto.cuidado }}</li>
+                        <li>Slim fit</li>
+                    </ul>
+
+                    <div class="tallas mt-3">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            {% for talla in producto.tallas %}
+                                <label class="btn btn-outline-secondary">
+                                    <input type="radio" name="size" id="talla-{{ talla }}" value="{{ talla }}" autocomplete="off"> {{ talla }}
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+                <section class="product-actions">
+                    <button class="btn btn-primary">Add to cart</button>
+                    <br>
+                    <button class="btn btn-primary gemini-recommendator">
+                        <img src="{{ url_for('static', filename='gemini.png') }}" alt="Gemini logo">
+                        <strong>G</strong>emini <strong>O</strong>utfit <strong>R</strong>ecommendator
+                    </button>
+                    <br>
+                    <img id="loading-spinner" src="{{ url_for('static', filename='spinner.png') }}" alt="Cargando..." style="display: none;">
+                </section>
+            </div>
+        </div>
+    </main>
+
+    {% include 'footer.html' %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>   
+    const geminiButton = document.querySelector('.gemini-recommendator');
+    const loadingSpinner = document.getElementById('loading-spinner');
+        
+    geminiButton.addEventListener('click', () => {
+        // Mostrar el spinner
+        loadingSpinner.style.display = 'inline-block';
+        // Obtener la URL de la imagen
+        const imageUrl = document.getElementById('product-image').src;
+    
+        // Enviar la URL al servidor usando AJAX (necesitarás una ruta en Flask para manejar esto)
+        fetch('/recomendaciones', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ imageUrl: imageUrl })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.redirect) {
+                window.location.href = data.redirect; // Redirige a la nueva página
+            } else {
+                console.error('Error al obtener recomendaciones:', data);   
+            }
+            // Ocultar el spinner después de la redirección o actualización
+            loadingSpinner.style.display = 'none';
+     // Manejar la respuesta del servidor si es necesario
+        })
+        .catch(error => {
+            console.error('Error al enviar la URL de la imagen:', error);
+            // Ocultar el spinner en caso de error
+            loadingSpinner.style.display = 'none';
+        });
+        
+        geminiButton.style.backgroundColor = 
+                    "#9068c1";
+        geminiButton.style.color = "white";
+    });
+    </script>
+    <script>
+    const tallaButtons = document.querySelectorAll('.btn-group .btn');
+    
+    tallaButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Deseleccionar todos los botones
+            tallaButtons.forEach(btn => btn.classList.remove('active'));
+    
+            // Seleccionar el botón clicado
+            button.classList.add('active');
+        });
+    });
+</script>
+    
+</body>
+</html>
