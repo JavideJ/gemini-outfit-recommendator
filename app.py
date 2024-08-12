@@ -16,21 +16,20 @@ def recomendaciones():
     data = request.get_json()
     imageUrl = data['imageUrl']
     
-    # Extraer la parte de la ruta después de 'static/'
+    # Extract the part of the path after 'static/'.
     user_image_path = imageUrl.split('/static/')[1]
 
-    # Usamos la funcion de gemini y ordenamos el diccionario con todas las imagenes
-    outfit_path_dict = gemini_outfit(imageUrl, 'my_closet')
+    # We use the gemini function and sort the dictionary with all the images.
+    outfit_path_dict = gemini_outfit(imageUrl, 'static/my_closet')
     outfit_path_dict_ordered = order_dict(outfit_path_dict, user_image_path)
-    result_image_paths = list(outfit_path_dict_ordered.values())  # Obtener solo las rutas de las imágenes
+    result_image_paths = list(outfit_path_dict_ordered.values())  # Get only the paths of the images
 
-    # Redirigir a la página de resultados
+    # Redirect to results page
     return jsonify({'redirect': url_for('resultados', result_image_paths=result_image_paths, producto=producto)})
 
 @app.route('/resultados')
 def resultados():
     result_image_paths = request.args.getlist('result_image_paths')
-    # user_image_path = request.args.getlist('user_image_path')[0]
     producto = import_json('data/product_details.json')
     
     return render_template('result_v2.html', result_image_paths=result_image_paths, producto=producto)

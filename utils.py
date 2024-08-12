@@ -138,6 +138,7 @@ def order_dict(outfit_path_dict, user_image_path):
     """
     
     clothing_types_order = ['shirts', 'tshirts', 'trousers', 'shoes']
+    outfit_path_dict = {key: value.replace('static/', '') for key, value in outfit_path_dict.items()}
     # Get the type of clothe of the item to buy
     clothing_img_type = list(set(clothing_types_order)-set(outfit_path_dict.keys()))[0]
     outfit_path_dict[clothing_img_type] = user_image_path
