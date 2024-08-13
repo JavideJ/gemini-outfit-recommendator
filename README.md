@@ -9,7 +9,9 @@ This user-friendly app enhances the shopping experience by helping customers mak
 Powered by the Gemini Pro Vision model, this app is able to analyse images and deliver insightful recommendations.  Due to the current model´s limit of processing 16 images, it iterates over various type of clothing (such as shirts Tshirts, trousers, and shoes) and multiple pictures of each type in each iteration, selecting the most suitable items for the outfit.
 
 # How to use it
-Make sure you have python (version 3.11.7 was used for this project) and pip installed.<br>
+Make sure you have python (version 3.11.7 was used for this project) and pip installed.<br><br>
+**IMPORTANT:** to make the app work, you will need your own cred.json file with the required info about your GCP project and the service account. You can check how to do it [here](https://developers.google.com/workspace/guides/create-credentials)<br>
+Please note that **charges will apply** for the use of the Gemini Pro Vision model.<br>
 1) Once you have downloaded all the files, **open the terminal in the same location as app.py**
 
 2) **Install depencies**. In your terminal, run:<br>
