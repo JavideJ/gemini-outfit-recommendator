@@ -10,7 +10,7 @@ def gemini_outfit(img_url, folder_path):
     - img_url: str with a url to a website with a png or jpg image of clothing
     - folder_path: str with the path to the images of your own clothes. This folder has to be organised into shirts, shoes, trousers or tshirts folders.
     """
-    
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'cred.json'
     multimodal_model = GenerativeModel("gemini-pro-vision")
     img_shop = utils.load_image_from_url(img_url)
 
